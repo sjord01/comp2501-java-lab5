@@ -1,4 +1,4 @@
-import java.util.Calendar;
+
 
 public class Person
 {
@@ -66,13 +66,27 @@ public class Person
         }
     }
 
+    /**
+     *
+     * @param educationLevelToVerify    the education level status of a person; in this program
+     *                                  it can only be "high school", "undergraduate", or "graduate"
+     * @return                          True or False; true if status is == "high school", "undergraduate", or "graduate",
+     *                                  else false
+     */
     private boolean isValidEducationLevel(String educationLevelToVerify)
     {
-        return  educationLevelToVerify.equals("high school") ||
-                educationLevelToVerify.equals("undergraduate") ||
-                educationLevelToVerify.equals("graduate");
+        return  educationLevelToVerify.equalsIgnoreCase("high school") ||
+                educationLevelToVerify.equalsIgnoreCase("undergraduate") ||
+                educationLevelToVerify.equalsIgnoreCase("graduate");
     }
 
+    /**
+     *
+     * @param marriageStatusToVerify    the marriage status of a person; in this program
+     *                                  it can only be "yes", "no", or "divorced"
+     * @return                          True or False; true if status is "yes", "no", or "divorced",
+     *                                  else false
+     */
     private boolean isValidMarriageStatus(String marriageStatusToVerify)
     {
         return  marriageStatusToVerify.equals("yes") ||
@@ -80,11 +94,19 @@ public class Person
                 marriageStatusToVerify.equals("divorced");
     }
 
+    /**
+     *
+     * @return the first name of the person
+     */
     public String getFirstName()
     {
         return firstName;
     }
 
+    /**
+     *
+     * @return the last name of the person
+     */
     public String getLastName()
     {
         return lastName;
@@ -112,7 +134,7 @@ public class Person
 
     public boolean isMarried()
     {
-        return married.equals("yes");
+        return married.equalsIgnoreCase("yes");
     }
 
     public void printDetails()
@@ -144,11 +166,50 @@ public class Person
         weight = kilograms ? convertToKilograms() : weightLbs;
         weightUnit = kilograms ? "kilograms" : "pounds";
 
-        return String.format("%s (%s) was born in %d, weighs %.1f %s, and has an %s degree!",
+        /*
+        if (uppercase) {
+            name = (firstName + " " + lastName).toUpperCase();
+        } else {
+            name = (firstName + " " + lastName).toLowerCase();
+        }
+
+        if (uppercase) {
+            maritalStatus = married.toUpperCase();
+        } else {
+            maritalStatus = married.toLowerCase();
+        }
+
+        if (kilograms) {
+            weight = convertToKilograms();
+        } else {
+            weight = weightLbs;
+        }
+
+        if (kilograms) {
+            weightUnit = "kilograms";
+        } else {
+            weightUnit = "pounds";
+        }
+         */
+
+        if(educationLevel.equalsIgnoreCase("undergraduate"))
+        {
+            return String.format("%s (%s) was born in %d, weighs %.1f %s, and has an %s degree!",
+                    name, maritalStatus, birthYear, weight, weightUnit, educationLevel);
+        }
+
+        if(educationLevel.equalsIgnoreCase("graduate"))
+        {
+            return String.format("%s (%s) was born in %d, weighs %.1f %s, and has a %s degree!",
+                    name, maritalStatus, birthYear, weight, weightUnit, educationLevel);
+        }
+        return String.format("%s (%s) was born in %d, weighs %.1f %s, and has a %s diploma!",
                 name, maritalStatus, birthYear, weight, weightUnit, educationLevel);
+
     }
 
-    private double convertToKilograms() {
+    private double convertToKilograms()
+    {
         return weightLbs * 0.453592;
     }
 
@@ -159,6 +220,7 @@ public class Person
         Person p3;
         p1 = new Person("Tiger", "Woods", 1975, "divorced", 200, "undergraduate");
         p1.printDetails();
+
         p1.printDetails(true);
         p1.printDetails(true, true);
         p1.printDetails(true, false);
