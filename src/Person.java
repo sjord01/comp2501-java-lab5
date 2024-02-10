@@ -153,6 +153,8 @@ public class Person
     }
 
     /**
+     * Returns the first name of the person
+     *
      * @return the first name of the person
      */
     public String getFirstName()
@@ -161,6 +163,8 @@ public class Person
     }
 
     /**
+     * Returns the last name of a person
+     *
      * @return the last name of the person
      */
     public String getLastName()
@@ -169,6 +173,8 @@ public class Person
     }
 
     /**
+     * Returns the birth year of a person
+     *
      * @return the birth year of a person
      */
     public int getBirthYear()
@@ -177,7 +183,8 @@ public class Person
     }
 
     /**
-     * @return return the marriage status of a person
+     * Returns the marriage status of a person
+     * @return the marriage status of a person
      */
     public String getMarried()
     {
@@ -185,6 +192,8 @@ public class Person
     }
 
     /**
+     * Returns the weight of a person in pounds(lbs)
+     *
      * @return the weight of a person in pounds(lbs)
      */
     public double getWeight()
@@ -193,6 +202,8 @@ public class Person
     }
 
     /**
+     * Returns the education level of a person
+     *
      * @return the education level of a person
      */
     public String getEducationLevel()
@@ -201,12 +212,52 @@ public class Person
     }
 
     /**
+     * Verifies if a person is married or not
+     *
      * @return True or False; verifies if a person is married or not
      */
     public boolean isMarried()
     {
         return married.equalsIgnoreCase("yes");
     }
+
+    /**
+     * Sets the weight of the person.
+     *
+     * @param weightLbs The weight of the person in pounds.
+     */
+    public void setWeight(final double weightLbs)
+    {
+        this.weightLbs = weightLbs;
+    }
+
+    /**
+     * Sets the marital status of the person.
+     *
+     * @param married                    The marital status of the person.
+     *                                  It can be "yes", "no", or "divorced"; case-insensitive.
+     * @throws IllegalArgumentException if the provided marital status is invalid.
+     */
+    public void setMarried(final String married)
+    {
+        isValidMarriageStatus(married);
+        this.married = married;
+    }
+
+    /**
+     * Sets the education level of the person.
+     *
+     * @param educationLevel            The highest education level attained by the person.
+     *                                  It can be "high school", "undergraduate", or "graduate"; case-insensitive.
+     * @throws IllegalArgumentException if the provided education level is invalid.
+     */
+    public void setEducationLevel(String educationLevel)
+    {
+        isValidEducationLevel(educationLevel);
+        this.educationLevel = educationLevel;
+    }
+
+
 
     /**
      * Method to print the details of a person with default formatting options.
