@@ -1,4 +1,4 @@
-
+import java.util.Calendar;
 
 public class Person
 {
@@ -10,8 +10,8 @@ public class Person
 
     private final String    educationLevel;
 
-    //public static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-    public static final int CURRENT_YEAR = 2024;
+    public static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    //public static final int CURRENT_YEAR = 2024;
 
     public Person(final String  firstName,
                   final String  lastName,
@@ -45,21 +45,35 @@ public class Person
         this.educationLevel = educationLevel;
         validateEducationLevel();
         validateMarriageStatus();
+
     }
 
     public Person(final String firstName,
                   final String lastName,
                   final double weight)
     {
-        this(firstName, lastName, CURRENT_YEAR, "no", weight, "high school");
+
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.birthYear = CURRENT_YEAR;
+        this.married = "no";
+        this.weightLbs = weight;
+        this.educationLevel = "highschool";
+
     }
 
+    /**
+     * @throws IllegalArgumentException if the education level is invalid
+     */
     private void validateEducationLevel() {
         if (!isValidEducationLevel(educationLevel)) {
             throw new IllegalArgumentException("Invalid education level");
         }
     }
 
+    /**
+     * @throws IllegalArgumentException if the mariage status is invalid
+     */
     private void validateMarriageStatus() {
         if (!isValidMarriageStatus(married)) {
             throw new IllegalArgumentException("Invalid marriage status");
@@ -81,7 +95,7 @@ public class Person
     }
 
     /**
-     *
+     * Validates the marriage status of a person; it can only be "yes" (meaning "married"), "no"(meaning "single"), or "divorced"
      * @param marriageStatusToVerify    the marriage status of a person; in this program
      *                                  it can only be "yes", "no", or "divorced"
      * @return                          True or False; true if status is "yes", "no", or "divorced",
@@ -95,7 +109,6 @@ public class Person
     }
 
     /**
-     *
      * @return the first name of the person
      */
     public String getFirstName()
@@ -104,7 +117,6 @@ public class Person
     }
 
     /**
-     *
      * @return the last name of the person
      */
     public String getLastName()
@@ -112,26 +124,41 @@ public class Person
         return lastName;
     }
 
+    /**
+     * @return the birth year of a person
+     */
     public int getBirthYear()
     {
         return birthYear;
     }
 
+    /**
+     * @return return the marriage status of a person
+     */
     public String getMarried()
     {
         return married;
     }
 
+    /**
+     * @return the weight of a person in pounds(lbs)
+     */
     public double getWeight()
     {
         return weightLbs;
     }
 
+    /**
+     * @return the education level of a person
+     */
     public String getEducationLevel()
     {
         return educationLevel;
     }
 
+    /**
+     * @return True or False; verifies if a person is married or not
+     */
     public boolean isMarried()
     {
         return married.equalsIgnoreCase("yes");
@@ -153,44 +180,87 @@ public class Person
         System.out.println(formatDetails(kilograms, uppercase));
     }
 
+    /**
+     * Formats the details of a person including their name, marital status, birth year,
+     * weight, weight unit, and education level.
+     *
+     * @param kilograms Indicates whether the weight should be displayed in kilograms.
+     * @param uppercase Indicates whether the output should be in uppercase.
+     * @return A formatted string containing the person's details.
+     */
     private String formatDetails(final boolean kilograms,
                                  final boolean uppercase)
     {
         final String name;
         final String maritalStatus;
+        final String formattedMaritalStatus;
         final double weight;
         final String weightUnit;
 
+        /*
         name = uppercase ? (firstName + " " + lastName).toUpperCase() : (firstName + " " + lastName).toLowerCase();
         maritalStatus = uppercase ? married.toUpperCase() : married.toLowerCase();
+        formattedMaritalStatus = maritalStatus.equalsIgnoreCase("yes") ?
+                (uppercase ? "MARRIED" : "married") :
+                (uppercase? "SINGLE" : "single");
         weight = kilograms ? convertToKilograms() : weightLbs;
         weightUnit = kilograms ? "kilograms" : "pounds";
+        */
 
-        /*
-        if (uppercase) {
+
+        if(uppercase)
+        {
             name = (firstName + " " + lastName).toUpperCase();
-        } else {
-            name = (firstName + " " + lastName).toLowerCase();
-        }
-
-        if (uppercase) {
             maritalStatus = married.toUpperCase();
-        } else {
+        }
+        else
+        {
+            name = (firstName + " " + lastName).toLowerCase();
             maritalStatus = married.toLowerCase();
         }
 
-        if (kilograms) {
+        if(maritalStatus.equalsIgnoreCase("yes"))
+        {
+            if(uppercase)
+            {
+                formattedMaritalStatus = "MARRIED";
+            }
+            else
+            {
+                formattedMaritalStatus = "married";
+            }
+        }
+        else
+        {
+            if(uppercase)
+            {
+                formattedMaritalStatus = "SINGLE";
+            }
+            else
+            {
+                formattedMaritalStatus = "single";
+            }
+        }
+
+        if(kilograms)
+        {
             weight = convertToKilograms();
-        } else {
+        }
+        else
+        {
             weight = weightLbs;
         }
 
-        if (kilograms) {
+        if
+        (kilograms)
+        {
             weightUnit = "kilograms";
-        } else {
+        }
+        else
+        {
             weightUnit = "pounds";
         }
-         */
+
 
         if(educationLevel.equalsIgnoreCase("undergraduate"))
         {
@@ -201,13 +271,17 @@ public class Person
         if(educationLevel.equalsIgnoreCase("graduate"))
         {
             return String.format("%s (%s) was born in %d, weighs %.1f %s, and has a %s degree!",
-                    name, maritalStatus, birthYear, weight, weightUnit, educationLevel);
+                    name, formattedMaritalStatus, birthYear, weight, weightUnit, educationLevel);
         }
         return String.format("%s (%s) was born in %d, weighs %.1f %s, and has a %s diploma!",
-                name, maritalStatus, birthYear, weight, weightUnit, educationLevel);
+                name, formattedMaritalStatus, birthYear, weight, weightUnit, educationLevel);
 
     }
 
+    /**
+     * Converts a person's weight from kilograms(kgs) to pounds(lbs)
+     * @return weight of person in lbs
+     */
     private double convertToKilograms()
     {
         return weightLbs * 0.453592;
