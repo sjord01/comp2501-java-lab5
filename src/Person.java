@@ -1,18 +1,29 @@
-import java.util.Calendar;
+
 
 public class Person
 {
     private final String    firstName;
     private final String    lastName;
     private final int       birthYear;
-    private final String    married;
-    private final double    weightLbs;
 
-    private final String    educationLevel;
+    private String married;
+    private double weightLbs;
+    private String educationLevel;
 
-    public static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
-    //public static final int CURRENT_YEAR = 2024;
+    //public static final int CURRENT_YEAR = Calendar.getInstance().get(Calendar.YEAR);
+    public static final int CURRENT_YEAR = 2024;
 
+    /**
+     * Constructor to initialize a Person object with all attributes provided.
+     *
+     * @param firstName      The first name of the person.
+     * @param lastName       The last name of the person.
+     * @param birthYear      The birth year of the person.
+     * @param married        The marital status of the person.
+     * @param weightLbs      The weight of the person in pounds.
+     * @param educationLevel The highest education level attained by the person.
+     * @throws IllegalArgumentException if the education level or marital status is invalid.
+     */
     public Person(final String  firstName,
                   final String  lastName,
                   final int     birthYear,
@@ -20,34 +31,55 @@ public class Person
                   final double  weightLbs,
                   final String educationLevel)
     {
+        validateEducationLevel();
+        validateMarriageStatus();
+
         this.firstName          = firstName;
         this.lastName           = lastName;
         this.birthYear          = birthYear;
         this.married            = married;
         this.weightLbs          = weightLbs;
         this.educationLevel     = educationLevel;
-        validateEducationLevel();
-        validateMarriageStatus();
     }
 
+
+    /**
+     * Constructor to initialize a Person object with five attributes provided,
+     * setting the birth year automatically to the current year.
+     *
+     * @param firstName      The first name of the person.
+     * @param lastName       The last name of the person.
+     * @param married        The marital status of the person.
+     * @param weightLbs      The weight of the person in pounds.
+     * @param educationLevel The highest education level attained by the person.
+     * @throws IllegalArgumentException if the education level or marital status is invalid.
+     */
     public Person(final String firstName,
                   final String lastName,
                   final String married,
                   final double weightLbs,
                   final String educationLevel)
     {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthYear = CURRENT_YEAR;
-        this.married = married;
-        this.weightLbs = weightLbs;
-        this.educationLevel = educationLevel;
         validateEducationLevel();
         validateMarriageStatus();
 
+        this.firstName          = firstName;
+        this.lastName           = lastName;
+        this.birthYear          = CURRENT_YEAR;
+        this.married            = married;
+        this.weightLbs          = weightLbs;
+        this.educationLevel     = educationLevel;
     }
 
+    /**
+     * Constructor to initialize a Person object with three attributes provided,
+     * setting the birth year automatically to the current year, marital status to "no",
+     * and education level to "high school".
+     *
+     * @param firstName The first name of the person.
+     * @param lastName  The last name of the person.
+     * @param weight    The weight of the person in pounds.
+     */
     public Person(final String firstName,
                   final String lastName,
                   final double weight)
