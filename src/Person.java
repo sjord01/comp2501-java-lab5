@@ -1,5 +1,11 @@
-
-
+/**
+ * Represents a person with attributes such as first name, last name, birth year, marital status,
+ * weight, and education level. Provides constructors to initialize a person object with different
+ * combinations of attributes and methods to retrieve and print the details of the person.
+ *
+ * @author Sam Ordonez, Joshua Lee, Yeongsuk Oh
+ * @version 1.0
+ */
 public class Person
 {
     private final String    firstName;
@@ -31,8 +37,14 @@ public class Person
                   final double  weightLbs,
                   final String educationLevel)
     {
-        validateEducationLevel();
-        validateMarriageStatus();
+        if(!isValidEducationLevel(educationLevel))
+        {
+            throw new IllegalArgumentException("Invalid education level");
+        }
+        if(!isValidMarriageStatus(married))
+        {
+            throw new IllegalArgumentException("Invalid marriage status");
+        }
 
         this.firstName          = firstName;
         this.lastName           = lastName;
@@ -60,8 +72,14 @@ public class Person
                   final double weightLbs,
                   final String educationLevel)
     {
-        validateEducationLevel();
-        validateMarriageStatus();
+        if(!isValidEducationLevel(educationLevel))
+        {
+            throw new IllegalArgumentException("Invalid education level");
+        }
+        if(!isValidMarriageStatus(married))
+        {
+            throw new IllegalArgumentException("Invalid marriage status");
+        }
 
         this.firstName          = firstName;
         this.lastName           = lastName;
@@ -84,35 +102,27 @@ public class Person
                   final String lastName,
                   final double weight)
     {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthYear = CURRENT_YEAR;
-        this.married = "no";
-        this.weightLbs = weight;
-        this.educationLevel = "highschool";
-
-    }
-
-    /**
-     * @throws IllegalArgumentException if the education level is invalid
-     */
-    private void validateEducationLevel() {
-        if (!isValidEducationLevel(educationLevel)) {
+        if(!isValidEducationLevel(educationLevel))
+        {
             throw new IllegalArgumentException("Invalid education level");
         }
-    }
-
-    /**
-     * @throws IllegalArgumentException if the mariage status is invalid
-     */
-    private void validateMarriageStatus() {
-        if (!isValidMarriageStatus(married)) {
+        if(!isValidMarriageStatus(married))
+        {
             throw new IllegalArgumentException("Invalid marriage status");
         }
+
+        this.firstName          = firstName;
+        this.lastName           = lastName;
+        this.birthYear          = CURRENT_YEAR;
+        this.married            = "no";
+        this.weightLbs          = weight;
+        this.educationLevel     = "highschool";
+
     }
 
     /**
+     * Validates if a user-input for education level is acceptable or not
+     * it can only be "high school", "undergraduate", or "graduate"; case-insensitive
      *
      * @param educationLevelToVerify    the education level status of a person; in this program
      *                                  it can only be "high school", "undergraduate", or "graduate"
@@ -127,7 +137,9 @@ public class Person
     }
 
     /**
-     * Validates the marriage status of a person; it can only be "yes" (meaning "married"), "no"(meaning "single"), or "divorced"
+     * Validates the marriage status of a person;
+     * it can only be "yes" (meaning "married"), "no"(meaning "single"), or "divorced"; case-insensitive
+     *
      * @param marriageStatusToVerify    the marriage status of a person; in this program
      *                                  it can only be "yes", "no", or "divorced"
      * @return                          True or False; true if status is "yes", "no", or "divorced",
@@ -196,16 +208,30 @@ public class Person
         return married.equalsIgnoreCase("yes");
     }
 
+    /**
+     * Method to print the details of a person with default formatting options.
+     */
     public void printDetails()
     {
         System.out.println(formatDetails(false, false));
     }
 
+    /**
+     * Method to print the details of a person with specified weight unit.
+     *
+     * @param kilograms Indicates whether the weight should be displayed in kilograms.
+     */
     public void printDetails(final boolean kilograms)
     {
         System.out.println(formatDetails(kilograms, false));
     }
 
+    /**
+     * Method to print the details of a person with specified formatting options.
+     *
+     * @param kilograms Indicates whether the weight should be displayed in kilograms.
+     * @param uppercase Indicates whether the output should be in uppercase.
+     */
     public void printDetails(final boolean kilograms,
                              final boolean uppercase)
     {
