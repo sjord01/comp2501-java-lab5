@@ -21,7 +21,6 @@ public class Person
 
     /**
      * Constructor to initialize a Person object with all attributes provided.
-     *
      * @param firstName      The first name of the person.
      * @param lastName       The last name of the person.
      * @param birthYear      The birth year of the person.
@@ -58,7 +57,6 @@ public class Person
     /**
      * Constructor to initialize a Person object with five attributes provided,
      * setting the birth year automatically to the current year.
-     *
      * @param firstName      The first name of the person.
      * @param lastName       The last name of the person.
      * @param married        The marital status of the person.
@@ -93,7 +91,6 @@ public class Person
      * Constructor to initialize a Person object with three attributes provided,
      * setting the birth year automatically to the current year, marital status to "no",
      * and education level to "high school".
-     *
      * @param firstName The first name of the person.
      * @param lastName  The last name of the person.
      * @param weight    The weight of the person in pounds.
@@ -123,7 +120,6 @@ public class Person
     /**
      * Validates if a user-input for education level is acceptable or not
      * it can only be "high school", "undergraduate", or "graduate"; case-insensitive
-     *
      * @param educationLevelToVerify    the education level status of a person; in this program
      *                                  it can only be "high school", "undergraduate", or "graduate"
      * @return                          True or False; true if status is == "high school", "undergraduate", or "graduate",
@@ -139,7 +135,6 @@ public class Person
     /**
      * Validates the marriage status of a person;
      * it can only be "yes" (meaning "married"), "no"(meaning "single"), or "divorced"; case-insensitive
-     *
      * @param marriageStatusToVerify    the marriage status of a person; in this program
      *                                  it can only be "yes", "no", or "divorced"
      * @return                          True or False; true if status is "yes", "no", or "divorced",
@@ -154,7 +149,6 @@ public class Person
 
     /**
      * Returns the first name of the person
-     *
      * @return the first name of the person
      */
     public String getFirstName()
@@ -164,7 +158,6 @@ public class Person
 
     /**
      * Returns the last name of a person
-     *
      * @return the last name of the person
      */
     public String getLastName()
@@ -174,7 +167,6 @@ public class Person
 
     /**
      * Returns the birth year of a person
-     *
      * @return the birth year of a person
      */
     public int getBirthYear()
@@ -193,7 +185,6 @@ public class Person
 
     /**
      * Returns the weight of a person in pounds(lbs)
-     *
      * @return the weight of a person in pounds(lbs)
      */
     public double getWeight()
@@ -203,7 +194,6 @@ public class Person
 
     /**
      * Returns the education level of a person
-     *
      * @return the education level of a person
      */
     public String getEducationLevel()
@@ -213,7 +203,6 @@ public class Person
 
     /**
      * Verifies if a person is married or not
-     *
      * @return True or False; verifies if a person is married or not
      */
     public boolean isMarried()
@@ -223,7 +212,6 @@ public class Person
 
     /**
      * Sets the weight of the person.
-     *
      * @param weightLbs The weight of the person in pounds.
      */
     public void setWeight(final double weightLbs)
@@ -233,8 +221,7 @@ public class Person
 
     /**
      * Sets the marital status of the person.
-     *
-     * @param married                    The marital status of the person.
+     * @param married                   The marital status of the person.
      *                                  It can be "yes", "no", or "divorced"; case-insensitive.
      * @throws IllegalArgumentException if the provided marital status is invalid.
      */
@@ -246,12 +233,11 @@ public class Person
 
     /**
      * Sets the education level of the person.
-     *
      * @param educationLevel            The highest education level attained by the person.
      *                                  It can be "high school", "undergraduate", or "graduate"; case-insensitive.
      * @throws IllegalArgumentException if the provided education level is invalid.
      */
-    public void setEducationLevel(String educationLevel)
+    public void setEducationLevel(final String educationLevel)
     {
         isValidEducationLevel(educationLevel);
         this.educationLevel = educationLevel;
@@ -269,7 +255,6 @@ public class Person
 
     /**
      * Method to print the details of a person with specified weight unit.
-     *
      * @param kilograms Indicates whether the weight should be displayed in kilograms.
      */
     public void printDetails(final boolean kilograms)
@@ -279,7 +264,6 @@ public class Person
 
     /**
      * Method to print the details of a person with specified formatting options.
-     *
      * @param kilograms Indicates whether the weight should be displayed in kilograms.
      * @param uppercase Indicates whether the output should be in uppercase.
      */
@@ -292,7 +276,6 @@ public class Person
     /**
      * Formats the details of a person including their name, marital status, birth year,
      * weight, weight unit, and education level.
-     *
      * @param kilograms Indicates whether the weight should be displayed in kilograms.
      * @param uppercase Indicates whether the output should be in uppercase.
      * @return A formatted string containing the person's details.
@@ -306,26 +289,15 @@ public class Person
         final double weight;
         final String weightUnit;
 
-        /*
-        name = uppercase ? (firstName + " " + lastName).toUpperCase() : (firstName + " " + lastName).toLowerCase();
-        maritalStatus = uppercase ? married.toUpperCase() : married.toLowerCase();
-        formattedMaritalStatus = maritalStatus.equalsIgnoreCase("yes") ?
-                (uppercase ? "MARRIED" : "married") :
-                (uppercase? "SINGLE" : "single");
-        weight = kilograms ? convertToKilograms() : weightLbs;
-        weightUnit = kilograms ? "kilograms" : "pounds";
-        */
-
-
         if(uppercase)
         {
-            name = (firstName + " " + lastName).toUpperCase();
-            maritalStatus = married.toUpperCase();
+            name            = (firstName + " " + lastName).toUpperCase();
+            maritalStatus   = married.toUpperCase();
         }
         else
         {
-            name = (firstName + " " + lastName).toLowerCase();
-            maritalStatus = married.toLowerCase();
+            name            = (firstName + " " + lastName).toLowerCase();
+            maritalStatus   = married.toLowerCase();
         }
 
         if(maritalStatus.equalsIgnoreCase("yes"))
@@ -360,8 +332,7 @@ public class Person
             weight = weightLbs;
         }
 
-        if
-        (kilograms)
+        if(kilograms)
         {
             weightUnit = "kilograms";
         }
@@ -370,21 +341,19 @@ public class Person
             weightUnit = "pounds";
         }
 
-
         if(educationLevel.equalsIgnoreCase("undergraduate"))
         {
-            return String.format("%s (%s) was born in %d, weighs %.1f %s, and has an %s degree!",
-                    name, maritalStatus, birthYear, weight, weightUnit, educationLevel);
+            return String.format(   "%s (%s) was born in %d, weighs %.1f %s, and has an %s degree!",
+                                    name, maritalStatus, birthYear, weight, weightUnit, educationLevel);
         }
 
         if(educationLevel.equalsIgnoreCase("graduate"))
         {
-            return String.format("%s (%s) was born in %d, weighs %.1f %s, and has a %s degree!",
-                    name, formattedMaritalStatus, birthYear, weight, weightUnit, educationLevel);
+            return String.format(   "%s (%s) was born in %d, weighs %.1f %s, and has a %s degree!",
+                                    name, formattedMaritalStatus, birthYear, weight, weightUnit, educationLevel);
         }
-        return String.format("%s (%s) was born in %d, weighs %.1f %s, and has a %s diploma!",
-                name, formattedMaritalStatus, birthYear, weight, weightUnit, educationLevel);
-
+        return String.format(   "%s (%s) was born in %d, weighs %.1f %s, and has a %s diploma!",
+                                name, formattedMaritalStatus, birthYear, weight, weightUnit, educationLevel);
     }
 
     /**
@@ -393,7 +362,7 @@ public class Person
      */
     private double convertToKilograms()
     {
-        return weightLbs * 0.453592;
+        return weightLbs / 2.2;
     }
 
     public static void main(final String[] args)
@@ -424,5 +393,4 @@ public class Person
         p3.printDetails(false, true);
         p3.printDetails(false, false);
     }
-
 }
